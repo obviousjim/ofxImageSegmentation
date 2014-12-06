@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ofxImageSegmentation.cpp">
+      <Filter>addons\ofxImageSegmentation\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ofxGui\src\ofxBaseGui.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ofxGui\src\ofxButton.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ofxGui\src\ofxGuiGroup.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ofxGui\src\ofxLabel.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ofxGui\src\ofxPanel.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ofxGui\src\ofxSlider.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ofxGui\src\ofxSliderGroup.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ofxGui\src\ofxToggle.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
+      <UniqueIdentifier>{ad862210-66e5-485e-a7e8-7d6b74805e03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxImageSegmentation">
+      <UniqueIdentifier>{074e14d7-dcb8-4e09-b53f-768f0586ca5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxImageSegmentation\src">
+      <UniqueIdentifier>{52b68e32-9ae8-49a9-903a-321d9481b17e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxImageSegmentation\libs">
+      <UniqueIdentifier>{2cdcd2dd-870e-482a-ba84-8bcecdbcd00f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxImageSegmentation\libs\egs">
+      <UniqueIdentifier>{42484516-3968-49c1-bb8c-3ffcf0bb9cf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxGui">
+      <UniqueIdentifier>{3ac180b0-5bf3-4b03-b858-e93723f8910b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxGui\src">
+      <UniqueIdentifier>{f5024d85-19ef-499b-8665-0e6d15aed719}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\egs\convolve.h">
+      <Filter>addons\ofxImageSegmentation\libs\egs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\egs\disjoint-set.h">
+      <Filter>addons\ofxImageSegmentation\libs\egs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\egs\filter.h">
+      <Filter>addons\ofxImageSegmentation\libs\egs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\egs\image.h">
+      <Filter>addons\ofxImageSegmentation\libs\egs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\egs\imconv.h">
+      <Filter>addons\ofxImageSegmentation\libs\egs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\egs\imutil.h">
+      <Filter>addons\ofxImageSegmentation\libs\egs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\egs\misc.h">
+      <Filter>addons\ofxImageSegmentation\libs\egs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\egs\pnmfile.h">
+      <Filter>addons\ofxImageSegmentation\libs\egs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\egs\segment-graph.h">
+      <Filter>addons\ofxImageSegmentation\libs\egs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\egs\segment-image.h">
+      <Filter>addons\ofxImageSegmentation\libs\egs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ofxImageSegmentation.h">
+      <Filter>addons\ofxImageSegmentation\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ofxGui\src\ofxBaseGui.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ofxGui\src\ofxButton.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ofxGui\src\ofxGui.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ofxGui\src\ofxGuiGroup.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ofxGui\src\ofxLabel.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ofxGui\src\ofxPanel.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ofxGui\src\ofxSlider.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ofxGui\src\ofxSliderGroup.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ofxGui\src\ofxToggle.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>
