@@ -116,6 +116,7 @@ int segment_image(image11<rgb> *im, float sigma, float c, int min_size,
   }
   delete [] edges;
   
+  //pull the graph apart into a data structure
   vector< vector< pair<int,int> > > maskbits_list;
   map<int, int> maskbits_index;
   for (y = 0; y < height; y++) {
@@ -129,10 +130,6 @@ int segment_image(image11<rgb> *im, float sigma, float c, int min_size,
     }
   }
 
- // map<int, vector< pair<int,int> > >::iterator it;
- // for(it = maskbits.begin(); it != maskbits.end(); it++){
-	//maskbits_list.push_back(it->second);
- // }
   sort(maskbits_list.begin(), maskbits_list.end(), maskbit_sort);
 
   //pick random colors for each component
@@ -148,7 +145,7 @@ int segment_image(image11<rgb> *im, float sigma, float c, int min_size,
     masks[i] = new image11<char>(width,height);
   }
 
-  //fill images
+  //fill pixels in images
   for(int i = 0; i < maskbits_list.size(); i++){
 	  for(int j = 0; j < maskbits_list[i].size(); j++){
         imRef(segmentation, maskbits_list[i][j].first, maskbits_list[i][j].second) = colors[i];
