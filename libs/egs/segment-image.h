@@ -27,6 +27,9 @@ static inline float diff(image11<float> *r, image11<float> *g, image11<float> *b
 	      square(imRef(b, x1, y1)-imRef(b, x2, y2)));
 }
 
+bool maskbit_sort(vector< pair<int,int> > a, vector< pair<int,int> > b){
+	return a.size() > b.size();
+}
 /*
  * Segment an image
  *
@@ -113,43 +116,48 @@ int segment_image(image11<rgb> *im, float sigma, float c, int min_size,
   }
   delete [] edges;
   
-
- // pick random colors for each component
-
-  map<int, vector< pair<int,int> > > maskbits;
+  vector< vector< pair<int,int> > > maskbits_list;
+  map<int, int> maskbits_index;
   for (y = 0; y < height; y++) {
     for ( x = 0; x < width; x++) {
       int comp = u->find(y * width + x);
-//      imRef(output, x, y) = colors[comp];
-	  maskbits[comp].push_back(make_pair(x,y));
+	  if(maskbits_index.find(comp) == maskbits_index.end()){
+		maskbits_index[comp] = maskbits_list.size();
+		maskbits_list.push_back( vector<pair<int,int>>() );
+	  }
+	  maskbits_list[ maskbits_index[comp] ].push_back(make_pair(x,y));
     }
-  }  
+  }
 
-  //generate colors
+ // map<int, vector< pair<int,int> > >::iterator it;
+ // for(it = maskbits.begin(); it != maskbits.end(); it++){
+	//maskbits_list.push_back(it->second);
+ // }
+  sort(maskbits_list.begin(), maskbits_list.end(), maskbit_sort);
 
-  rgb *colors = new rgb[maskbits.size()];
-  for (i = 0; i < maskbits.size(); i++){
+  //pick random colors for each component
+  rgb *colors = new rgb[maskbits_list.size()];
+  for (i = 0; i < maskbits_list.size(); i++){
     colors[i] = random_rgb();
   }
 
+  //allocate segmentation images
   segmentation = new image11<rgb>(width, height);
-  masks = new image11<char>*[maskbits.size()];
-  for(int i = 0; i < maskbits.size(); i++){
+  masks = new image11<char>*[maskbits_list.size()];
+  for(int i = 0; i < maskbits_list.size(); i++){
     masks[i] = new image11<char>(width,height);
   }
 
-  map<int, vector< pair<int,int> > >::iterator it;
-  int curMask = 0;
-  for(it = maskbits.begin(); it != maskbits.end(); it++){
-	  for(int i = 0; i < it->second.size(); i++){
-        imRef(segmentation, it->second[i].first, it->second[i].second) = colors[curMask];
-		imRef(masks[curMask], it->second[i].first, it->second[i].second) = 255;
+  //fill images
+  for(int i = 0; i < maskbits_list.size(); i++){
+	  for(int j = 0; j < maskbits_list[i].size(); j++){
+        imRef(segmentation, maskbits_list[i][j].first, maskbits_list[i][j].second) = colors[i];
+		imRef(masks[i], maskbits_list[i][j].first, maskbits_list[i][j].second) = 255;
       }
-	  curMask++;
   }
 
   int num_css = u->num_sets();
-  cout << "num comps " << maskbits.size() << " num sets " << num_css << endl;
+  cout << "num comps " << maskbits_list.size() << " num sets " << num_css << endl;
   
   delete [] colors;  
   delete u;
