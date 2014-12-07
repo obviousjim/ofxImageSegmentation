@@ -38,8 +38,8 @@ static inline float diff(image11<float> *r, image11<float> *g, image11<float> *b
  * min_size: minimum component size (enforced by post-processing stage).
  * num_ccs: number of connected components in the segmentation.
  */
-image11<rgb> *segment_image(image11<rgb> *im, float sigma, float c, int min_size,
-			  int *num_ccs) {
+int segment_image(image11<rgb> *im, float sigma, float c, int min_size,
+			  image11<rgb>*& segmentation, image11<char>**& masks) {
   int width = im->width();
   int height = im->height();
 
@@ -112,26 +112,49 @@ image11<rgb> *segment_image(image11<rgb> *im, float sigma, float c, int min_size
       u->join(a, b);
   }
   delete [] edges;
-  *num_ccs = u->num_sets();
-
-  image11<rgb> *output = new image11<rgb>(width, height);
-
-  // pick random colors for each component
-  rgb *colors = new rgb[width*height];
-  for (i = 0; i < width*height; i++)
-    colors[i] = random_rgb();
   
+
+ // pick random colors for each component
+
+  map<int, vector< pair<int,int> > > maskbits;
   for (y = 0; y < height; y++) {
     for ( x = 0; x < width; x++) {
       int comp = u->find(y * width + x);
-      imRef(output, x, y) = colors[comp];
+//      imRef(output, x, y) = colors[comp];
+	  maskbits[comp].push_back(make_pair(x,y));
     }
   }  
 
+  //generate colors
+
+  rgb *colors = new rgb[maskbits.size()];
+  for (i = 0; i < maskbits.size(); i++){
+    colors[i] = random_rgb();
+  }
+
+  segmentation = new image11<rgb>(width, height);
+  masks = new image11<char>*[maskbits.size()];
+  for(int i = 0; i < maskbits.size(); i++){
+    masks[i] = new image11<char>(width,height);
+  }
+
+  map<int, vector< pair<int,int> > >::iterator it;
+  int curMask = 0;
+  for(it = maskbits.begin(); it != maskbits.end(); it++){
+	  for(int i = 0; i < it->second.size(); i++){
+        imRef(segmentation, it->second[i].first, it->second[i].second) = colors[curMask];
+		imRef(masks[curMask], it->second[i].first, it->second[i].second) = 255;
+      }
+	  curMask++;
+  }
+
+  int num_css = u->num_sets();
+  cout << "num comps " << maskbits.size() << " num sets " << num_css << endl;
+  
   delete [] colors;  
   delete u;
 
-  return output;
+  return num_css;
 }
 
 #endif

@@ -196,18 +196,8 @@ void save_image(image11<T> *im, const char *name) {
 
 
 static image11<rgb> *loadPixels(ofPixels& pixels) {
-	int x,y;
-
 	image11<rgb> *im = new image11<rgb>(pixels.getWidth(), pixels.getHeight());	
-	for(y=0;y<pixels.getHeight();y++){
-		for(x=0;x<pixels.getWidth();x++){
-			int index = pixels.getPixelIndex(x,y);
-			imRef(im,x,y).r = ((uchar)(pixels.getPixels()[ index+0 ]));
-			imRef(im,x,y).g = ((uchar)(pixels.getPixels()[ index+1 ]));
-			imRef(im,x,y).b = ((uchar)(pixels.getPixels()[ index+2 ]));
-		}
-	}
-
+	memcpy(im->data,pixels.getPixels(),pixels.getWidth()*pixels.getHeight()*pixels.getBytesPerPixel());
 	return im;
 }
 

@@ -35,6 +35,13 @@ void ofApp::draw(){
 	videoInput.draw(0,0);
 	if(segmentedImage.isAllocated()){
 		segmentedImage.draw(videoInput.getWidth(),0);
+		//draw all the little masks below
+		ofImage image;
+		for(int i = 0; i < segmentation.numSegments; i++){
+			image.setFromPixels(segmentation.getSegmentMask(i));
+			image.update();
+			image.draw(i*160,240,160,120);
+		}
 	}
 
 	gui.draw();
